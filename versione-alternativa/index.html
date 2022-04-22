@@ -43,6 +43,9 @@
                 {{task.text}}
               </div>
               <div class="action_task">
+                <div class="modify_task" @click="modifyTask(index)">
+                  <i class="fa-solid fa-pencil"></i>
+                </div>
                 <div class="task_done" @click="doOrUndo(index)">
                   <i class="fa-regular fa-circle-check"></i>
                 </div>

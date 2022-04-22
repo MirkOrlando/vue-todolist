@@ -40,7 +40,7 @@ const app = new Vue(
             newTask: '',
             tasks: [
                 {
-                    text: 'Fare i Compiti',
+                    text: 'Fare i compiti',
                     done: false,
                 },
                 {
@@ -75,6 +75,15 @@ const app = new Vue(
                 } else {
                     alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
                     this.newTask = ''
+                }
+            },
+            modifyTask(i) {
+                const newText = prompt('Digita il nuovo testo della task');
+                if (newText.length > 2 && newText.length < 50) {
+                    this.tasks[i].text = newText;
+                    alert(`Task modificata con successo: ${this.tasks[i].text}`)
+                } else {
+                    alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
                 }
             },
             getToTrashTask(i) {

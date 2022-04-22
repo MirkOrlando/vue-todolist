@@ -45,6 +45,8 @@ section {
   background-color: white;
   width: calc(100% / 3);
   min-height: 250px;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px #000000a6;
 }
 
 .logo {
@@ -96,15 +98,20 @@ section {
   color: rgb(237, 200, 100);
 }
 
+.task > .action_task > .modify_task {
+  color: rgb(198, 100, 237);
+}
+
 .task > .action_task > .undo,
 .task > .action_task > .task_done,
 .task > .action_task > .delete,
-.task > .action_task > .untrash {
+.task > .action_task > .untrash,
+.task > .action_task > .modify_task {
   cursor: pointer;
 }
 
 .task > .text {
-  max-width: 200px;
+  max-width: 180px;
 }
 
 .done {
