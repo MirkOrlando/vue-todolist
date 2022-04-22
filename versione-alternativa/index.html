@@ -27,19 +27,14 @@
           />
           <button @click="addTask">Aggiungi</button>
         </div>
-        <section class="tasks_container" v-if="tasks.length > 0">
-          <div class="task" v-for="(task, index) in tasks">
-            <div class="details_task">
-              <div
-                class="task_todo"
-                @click="doOrUndo(index)"
-                v-if="task.done === false"
-              >
-                <i class="fa-regular fa-circle"></i>
-              </div>
-              <div class="task_done" @click="doOrUndo(index)" v-else>
-                <i class="fa-regular fa-circle-check"></i>
-              </div>
+        <div class="tasks_container" v-if="tasks.length > 0">
+          <section class="tasks_todo">
+            <h3>Todo list</h3>
+            <div
+              class="task"
+              v-for="(task, index) in tasks"
+              v-if="task.done === false"
+            >
               <div
                 class="text"
                 @click="doOrUndo(index)"
@@ -47,12 +42,62 @@
               >
                 {{task.text}}
               </div>
+              <div class="action_task">
+                <div class="task_done" @click="doOrUndo(index)">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="delete" @click="trashTask(index)">
+                  <i class="fa-regular fa-times-circle"></i>
+                </div>
+              </div>
             </div>
-            <div class="delete" @click="removeTask(index)">
-              <i class="fa-regular fa-times-circle"></i>
+          </section>
+          <section class="tasks_done">
+            <h3>Completed</h3>
+            <div
+              class="task"
+              v-for="(task, index) in tasks"
+              v-if="task.done === true"
+            >
+              <div
+                class="text"
+                @click="doOrUndo(index)"
+                :class="task.done === true ? 'done' : ''"
+              >
+                {{task.text}}
+              </div>
+              <div class="action_task">
+                <div class="undo" @click="doOrUndo(index)">
+                  <i class="fa-solid fa-arrow-rotate-left"></i>
+                </div>
+                <div class="delete" @click="trashTask(index)">
+                  <i class="fa-regular fa-times-circle"></i>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+          <section class="trashed">
+            <h3>trashed</h3>
+            <div
+            class="task"
+            v-for="(taskTrashed, index) in tasksTrashed"
+          >
+            <div
+              class="text"
+              @click="doOrUndo(index)"
+            >
+              {{taskTrashed.text}}
+            </div>
+            <div class="action_task">
+              <div class="task_done" @click="doOrUndo(index)">
+                <i class="fa-regular fa-circle-check"></i>
+              </div>
+              <div class="delete" @click="trashTask(index)">
+                <i class="fa-regular fa-times-circle"></i>
+              </div>
+            </div>
+          </section>
+        </div>
         <p v-else>No tasks planned for today</p>
       </div>
     </div>

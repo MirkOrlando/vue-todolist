@@ -6,6 +6,7 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(171, 208, 210);
 }
 
 img {
@@ -13,7 +14,7 @@ img {
 }
 
 .container {
-  width: 800px;
+  width: 1000px;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
@@ -21,10 +22,18 @@ img {
   align-items: center;
 }
 
+.tasks_container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
 section {
-  width: 55%;
   padding: 1.5rem;
-  background-color: rgb(248, 246, 243);
+  background-color: white;
+  width: calc(100% / 3);
+  min-height: 250px;
 }
 
 .logo {
@@ -55,28 +64,27 @@ section {
   border-bottom: 1px solid lightgray;
 }
 
-.task > .details_task {
+.task > .action_task {
   display: flex;
   gap: 0.5rem;
 }
 
-.task > .details_task > .task_todo {
+.task > .action_task > .task_done {
   color: cornflowerblue;
 }
 
-.task > .details_task > .task_done {
-  color: rgb(100, 237, 152);
-}
-
-.task > .delete {
+.task > .action_task > .delete {
   color: rgb(237, 125, 100);
 }
 
-.task > .details_task > .task_todo,
-.task > .details_task > .task_done,
-.task > .details_task > .text,
-.task > .delete {
+.task > .action_task > .undo,
+.task > .action_task > .task_done,
+.task > .action_task > .delete {
   cursor: pointer;
+}
+
+.task > .text {
+  max-width: 200px;
 }
 
 .done {
