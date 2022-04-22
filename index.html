@@ -19,8 +19,8 @@
       <div class="container">
         <h1>boolean</h1>
         <div class="action">
-          <input type="text" placeholder="Nuovo Todo" />
-          <button>Aggiungi</button>
+          <input type="text" placeholder="Nuovo Todo" v-model="newTask.text" />
+          <button @click="addTask">Aggiungi</button>
         </div>
         <section class="tasks_container">
           <div class="task" v-for="task in tasks">

@@ -31,6 +31,10 @@ const app = new Vue(
     {
         el: '#app',
         data: {
+            newTask: {
+                text: '',
+                done: false
+            },
             tasks: [
                 {
                     text: 'Fare i Compiti',
@@ -51,8 +55,9 @@ const app = new Vue(
             ]
         },
         methods: {
-            taskDone() {
-
+            addTask() {
+                this.tasks.unshift(this.newTask)
+                this.newTask = ''
             }
         },
     }
