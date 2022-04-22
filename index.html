@@ -22,16 +22,17 @@
           <input type="text" placeholder="Nuovo Todo" v-model="newTask.text" />
           <button @click="addTask">Aggiungi</button>
         </div>
-        <section class="tasks_container">
-          <div class="task" v-for="task in tasks">
+        <section class="tasks_container" v-if="tasks.length > 0">
+          <div class="task" v-for="(task, index) in tasks">
             <div class="text" :class="task.done === true ? 'done' : ''">
               {{task.text}}
             </div>
-            <div class="delete">
+            <div class="delete" @click="removeTask(index)">
               <i class="fa-regular fa-times-circle"></i>
             </div>
           </div>
         </section>
+        <p v-else>No tasks planned for today</p>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>

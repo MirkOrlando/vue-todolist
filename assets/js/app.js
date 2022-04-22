@@ -57,7 +57,11 @@ const app = new Vue(
         methods: {
             addTask() {
                 this.tasks.unshift(this.newTask)
-                this.newTask = ''
+                this.newTask.text = ''
+            },
+            removeTask(i) {
+                console.log('removing task', i);
+                this.tasks.splice(i, 1)
             }
         },
     }
