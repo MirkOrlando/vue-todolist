@@ -13,6 +13,17 @@ img {
   max-width: 100%;
 }
 
+h3 {
+  margin-bottom: 0.75rem;
+}
+
+h3 > span {
+  font-size: 0.75rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .container {
   width: 1000px;
   margin: 2rem auto;
@@ -70,6 +81,10 @@ section {
 }
 
 .task > .action_task > .task_done {
+  color: rgb(100, 237, 121);
+}
+
+.task > .action_task > .undo {
   color: cornflowerblue;
 }
 
@@ -77,9 +92,14 @@ section {
   color: rgb(237, 125, 100);
 }
 
+.task > .action_task > .untrash {
+  color: rgb(237, 200, 100);
+}
+
 .task > .action_task > .undo,
 .task > .action_task > .task_done,
-.task > .action_task > .delete {
+.task > .action_task > .delete,
+.task > .action_task > .untrash {
   cursor: pointer;
 }
 

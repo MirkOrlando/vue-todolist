@@ -25,8 +25,11 @@ Consultate la documentazione e se siete bloccati, aprite un ticket.
 - ah non é finita, dice che quando cancella una task non vuole 
   che questa venga subito rimossa, 
   ma vuole che resti visibile e venga spostata in una colonna tipo "cestino"
-- si, l'utente é un rompi scatole, dice infine che vuole poter rimuovere tutte le tasks nel cestino cliccando su un pulsante tipo "svuota cestino"
-Il nostro utente per ora sembra non avere altre richieste ... ma chissá se dopo gli viene in mente che vuole anche poter rimettere una task cancellata nella lista di tasks da fare, magari l'ha cancellata per sbaglio...
+- si, l'utente é un rompi scatole, dice infine che vuole poter rimuovere tutte 
+  le tasks nel cestino cliccando su un pulsante tipo "svuota cestino"
+Il nostro utente per ora sembra non avere altre richieste ...
+ma chissá se dopo gli viene in mente che vuole anche poter rimettere 
+una task cancellata nella lista di tasks da fare, magari l'ha cancellata per sbaglio...
 Qui sotto alcuni screenshot per farvi vedere il funzionamento dell'app
 */
 
@@ -53,7 +56,12 @@ const app = new Vue(
                     done: false,
                 },
             ],
-            tasksTrashed: []
+            tasksTrashed: [
+                {
+                    text: 'Fare gli auguri di buon compleanno a Paolo',
+                    done: false,
+                },
+            ]
         },
         methods: {
             addTask() {
@@ -69,13 +77,24 @@ const app = new Vue(
                     this.newTask = ''
                 }
             },
-            trashTask(i) {
+            getToTrashTask(i) {
                 // console.log('removing task', i);
-                this.tasksTrashed.push(this.tasks.splice(i, 1))
+                // this.tasks.splice(i, 1)
+                // console.log(this.tasks.splice(i, 1)[0]);
+                this.tasksTrashed.unshift(this.tasks.splice(i, 1)[0])
             },
             doOrUndo(i) {
                 // console.log('doing or undoing');
                 this.tasks[i].done = !this.tasks[i].done
+            },
+            untrashTask(i) {
+                this.tasks.push(this.tasksTrashed.splice(i, 1)[0])
+            },
+            emptyBin() {
+                const userAnswer = prompt("Sei sicuro di voler svuotare il cestino? (y/n) Il suo contenuto non potrà essere recuperato");
+                if (userAnswer === 'y') {
+                    this.tasksTrashed = []                    
+                }
             }
         },
     }

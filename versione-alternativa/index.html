@@ -46,7 +46,7 @@
                 <div class="task_done" @click="doOrUndo(index)">
                   <i class="fa-regular fa-circle-check"></i>
                 </div>
-                <div class="delete" @click="trashTask(index)">
+                <div class="delete" @click="getToTrashTask(index)">
                   <i class="fa-regular fa-times-circle"></i>
                 </div>
               </div>
@@ -70,14 +70,14 @@
                 <div class="undo" @click="doOrUndo(index)">
                   <i class="fa-solid fa-arrow-rotate-left"></i>
                 </div>
-                <div class="delete" @click="trashTask(index)">
+                <div class="delete" @click="getToTrashTask(index)">
                   <i class="fa-regular fa-times-circle"></i>
                 </div>
               </div>
             </div>
           </section>
           <section class="trashed">
-            <h3>trashed</h3>
+            <h3>Trashed <span @click="emptyBin">(Empty bin)</span></h3>
             <div
             class="task"
             v-for="(taskTrashed, index) in tasksTrashed"
@@ -89,11 +89,8 @@
               {{taskTrashed.text}}
             </div>
             <div class="action_task">
-              <div class="task_done" @click="doOrUndo(index)">
-                <i class="fa-regular fa-circle-check"></i>
-              </div>
-              <div class="delete" @click="trashTask(index)">
-                <i class="fa-regular fa-times-circle"></i>
+              <div class="untrash" @click="untrashTask(index)">
+                <i class="fa-solid fa-arrow-circle-up"></i>
               </div>
             </div>
           </section>
