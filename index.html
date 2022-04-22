@@ -19,12 +19,21 @@
       <div class="container">
         <h1>boolean</h1>
         <div class="action">
-          <input type="text" placeholder="Nuovo Todo" v-model="newTask.text" />
+          <input
+            type="text"
+            placeholder="Nuovo Todo"
+            v-model="newTask"
+            @keyup.enter="addTask"
+          />
           <button @click="addTask">Aggiungi</button>
         </div>
         <section class="tasks_container" v-if="tasks.length > 0">
           <div class="task" v-for="(task, index) in tasks">
-            <div class="text" :class="task.done === true ? 'done' : ''">
+            <div
+              class="text"
+              @click="doOrUndo(index)"
+              :class="task.done === true ? 'done' : ''"
+            >
               {{task.text}}
             </div>
             <div class="delete" @click="removeTask(index)">

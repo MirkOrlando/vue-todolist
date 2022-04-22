@@ -31,10 +31,7 @@ const app = new Vue(
     {
         el: '#app',
         data: {
-            newTask: {
-                text: '',
-                done: false
-            },
+            newTask: '',
             tasks: [
                 {
                     text: 'Fare i Compiti',
@@ -56,12 +53,22 @@ const app = new Vue(
         },
         methods: {
             addTask() {
-                this.tasks.unshift(this.newTask)
-                this.newTask.text = ''
+                if (this.newTask !== '') {
+                    this.newTask = {
+                        text: this.newTask,
+                        done: false,
+                    }
+                    this.tasks.unshift(this.newTask)
+                    this.newTask = ''
+                }
             },
             removeTask(i) {
-                console.log('removing task', i);
+                // console.log('removing task', i);
                 this.tasks.splice(i, 1)
+            },
+            doOrUndo(i) {
+                // console.log('doing or undoing');
+                this.tasks[i].done = !this.tasks[i].done
             }
         },
     }

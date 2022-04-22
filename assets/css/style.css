@@ -33,6 +33,11 @@
   border-bottom: 1px solid lightgray;
 }
 
+.task > .text,
+.task > .delete {
+  cursor: pointer;
+}
+
 section {
   width: 40%;
   padding: 1.5rem;
