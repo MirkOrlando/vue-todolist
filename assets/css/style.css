@@ -14,7 +14,15 @@
 }
 
 .action {
-  margin: 2rem;
+  margin: 1rem 0;
+}
+
+.action > input,
+.action > button {
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 00.5rem;
+  margin: 0.5rem;
 }
 
 .task {
@@ -29,4 +37,8 @@ section {
   width: 40%;
   padding: 1.5rem;
   background-color: rgb(237, 251, 237);
+}
+
+.done {
+  text-decoration: line-through;
 }

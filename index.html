@@ -24,7 +24,9 @@
         </div>
         <section class="tasks_container">
           <div class="task" v-for="task in tasks">
-            <div class="text">{{task.text}}</div>
+            <div class="text" :class="task.done === true ? 'done' : ''">
+              {{task.text}}
+            </div>
             <div class="delete">
               <i class="fa-regular fa-times-circle"></i>
             </div>
