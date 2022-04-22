@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Todo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="logo"><img src="./assets/img/logo.png" alt="logo" /></div>
+        <div class="action">
+          <input
+            type="text"
+            placeholder="Nuovo Todo"
+            v-model="newTask"
+            @keyup.enter="addTask"
+          />
+          <button @click="addTask">Aggiungi</button>
+        </div>
+        <section class="tasks_container" v-if="tasks.length > 0">
+          <div class="task" v-for="(task, index) in tasks">
+            <div class="details_task">
+              <div
+                class="task_todo"
+                @click="doOrUndo(index)"
+                v-if="task.done === false"
+              >
+                <i class="fa-regular fa-circle"></i>
+              </div>
+              <div class="task_done" @click="doOrUndo(index)" v-else>
+                <i class="fa-regular fa-circle-check"></i>
+              </div>
+              <div
+                class="text"
+                @click="doOrUndo(index)"
+                :class="task.done === true ? 'done' : ''"
+              >
+                {{task.text}}
+              </div>
+            </div>
+            <div class="delete" @click="removeTask(index)">
+              <i class="fa-regular fa-times-circle"></i>
+            </div>
+          </div>
+        </section>
+        <p v-else>No tasks planned for today</p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="./assets/js/app.js"></script>
+  </body>
+</html>
