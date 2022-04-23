@@ -33,113 +33,108 @@ una task cancellata nella lista di tasks da fare, magari l'ha cancellata per sba
 Qui sotto alcuni screenshot per farvi vedere il funzionamento dell'app
 */
 
-const app = new Vue(
-    {
-        el: '#app',
-        data: {
-            newTask: '',
-            isDone: false,
-            areDone: false,
-            tasks: [
-                {
-                    text: 'Fare i compiti',
+const app = new Vue({
+    el: '#app',
+    data: {
+        newTask: '',
+        isDone: false,
+        areDone: false,
+        tasks: [{
+                text: 'Fare i compiti',
+                done: false,
+            },
+            {
+                text: 'Fare la spesa',
+                done: true,
+            },
+            {
+                text: 'Fare il bucato',
+                done: false,
+            },
+            {
+                text: 'Preparare il pranzo',
+                done: false,
+            },
+        ],
+        tasksTrashed: [{
+            text: 'Fare gli auguri di buon compleanno a Paolo',
+            done: false,
+        }, ]
+    },
+    methods: {
+        addTask() {
+            if (this.newTask.length > 2 && this.newTask.length < 50) {
+                this.newTask = {
+                    text: this.newTask,
                     done: false,
-                },
-                {
-                    text: 'Fare la spesa',
-                    done: true,
-                },
-                {
-                    text: 'Fare il bucato',
-                    done: false,
-                },
-                {
-                    text: 'Preparare il pranzo',
-                    done: false,
-                },
-            ],
-            tasksTrashed: [
-                {
-                    text: 'Fare gli auguri di buon compleanno a Paolo',
-                    done: false,
-                },
-            ]
-        },
-        methods: {
-            addTask() {
-                if (this.newTask.length > 2 && this.newTask.length < 50 ) {
-                    this.newTask = {
-                        text: this.newTask,
-                        done: false,
-                    }
-                    this.tasks.unshift(this.newTask)
-                    this.newTask = ''
-                } else {
-                    alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
-                    this.newTask = ''
                 }
-            },
-            modifyTask(i) {
-                const newText = prompt('Digita il nuovo testo della task');
-                if (newText.length > 2 && newText.length < 50) {
-                    this.tasks[i].text = newText;
-                    alert(`Task modificata con successo: ${this.tasks[i].text}`)
-                } else {
-                    alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
-                }
-            },
-            getToTrashTask(i) {
-                // console.log('removing task', i);
-                // this.tasks.splice(i, 1)
-                // console.log(this.tasks.splice(i, 1)[0]);
-                this.tasksTrashed.unshift(this.tasks.splice(i, 1)[0])
-                this.isTaskDone()
-                this.areAllTasksDone()
-            },
-            doOrUndo(i) {
-                // console.log('doing or undoing');
-                this.tasks[i].done = !this.tasks[i].done
-                this.isTaskDone()
-                this.areAllTasksDone()
-            },
-            untrashTask(i) {
-                this.tasks.push(this.tasksTrashed.splice(i, 1)[0])
-                this.isTaskDone()
-                this.areAllTasksDone()
-            },
-            emptyBin() {
-                const userAnswer = prompt("Sei sicuro di voler svuotare il cestino? (y/n) Il suo contenuto non potrà essere recuperato");
-                if (userAnswer === 'y') {
-                    this.tasksTrashed = []                    
-                }
-            },
-            isTaskDone() {
-                this.isDone = false
-                this.tasks.forEach(task => {
-                    if (task.done === true) {
-                        this.isDone = true
-                    }
-                });
-            },
-            areAllTasksDone() {
-                this.areDone = false
-                let j = 0
-                while (j < this.tasks.length) {
-                    const task = this.tasks[j];
-                    // console.log(task.done, task.text);
-                    if (task.done === true) {
-                        this.areDone = true;
-                        j++                        
-                    } else {
-                        this.areDone = false
-                        j = this.tasks.length
-                    }
-                }
+                this.tasks.unshift(this.newTask)
+                this.newTask = ''
+            } else {
+                alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
+                this.newTask = ''
             }
         },
-        created() {
+        modifyTask(i) {
+            const newText = prompt('Digita il nuovo testo della task');
+            if (newText.length > 2 && newText.length < 50) {
+                this.tasks[i].text = newText;
+                alert(`Task modificata con successo: ${this.tasks[i].text}`)
+            } else {
+                alert('inserire una stringa di lunghezza compresa tra 3 e 50 caratteri')
+            }
+        },
+        getToTrashTask(i) {
+            // console.log('removing task', i);
+            // this.tasks.splice(i, 1)
+            // console.log(this.tasks.splice(i, 1)[0]);
+            this.tasksTrashed.unshift(this.tasks.splice(i, 1)[0])
             this.isTaskDone()
             this.areAllTasksDone()
+        },
+        doOrUndo(i) {
+            // console.log('doing or undoing');
+            this.tasks[i].done = !this.tasks[i].done
+            this.isTaskDone()
+            this.areAllTasksDone()
+        },
+        untrashTask(i) {
+            this.tasks.push(this.tasksTrashed.splice(i, 1)[0])
+            this.isTaskDone()
+            this.areAllTasksDone()
+        },
+        emptyBin() {
+            const userAnswer = prompt("Sei sicuro di voler svuotare il cestino? (y/n) Il suo contenuto non potrà essere recuperato");
+            if (userAnswer === 'y') {
+                this.tasksTrashed = []
+            }
+        },
+        isTaskDone() {
+            this.isDone = false
+            this.tasks.forEach(task => {
+                if (task.done === true) {
+                    this.isDone = true
+                }
+            });
+        },
+        areAllTasksDone() {
+            this.areDone = false
+            let j = 0
+            while (j < this.tasks.length) {
+                const task = this.tasks[j];
+                // console.log(task.done, task.text);
+                if (task.done === true) {
+                    this.areDone = true;
+                    j++
+                } else {
+                    this.areDone = false
+                    j = this.tasks.length
+                }
+            }
         }
+    },
+    created() {
+        this.isTaskDone()
+        this.areAllTasksDone()
     }
-)
+})

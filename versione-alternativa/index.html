@@ -1,106 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue Todo List</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==' crossorigin='anonymous' referrerpolicy='no-referrer'
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="app">
-      <div class="container">
-        <div class="logo"><img src="./assets/img/logo.png" alt="logo" /></div>
-        <div class="action">
-          <input
-            type="text"
-            placeholder="Nuovo Todo"
-            v-model="newTask"
-            @keyup.enter="addTask"
-          />
-          <button @click="addTask">Aggiungi</button>
+        <div class="container">
+            <div class="logo"><img src="./assets/img/logo.png" alt="logo" /></div>
+            <div class="action">
+                <input type="text" placeholder="Nuovo Todo" v-model="newTask" @keyup.enter="addTask" />
+                <button @click="addTask">Aggiungi</button>
+            </div>
+            <div class="tasks_container">
+                <section class="tasks_todo" :class="areDone || tasks.length === 0 ? 'hidden' : ''">
+                    <h3>Todo list</h3>
+                    <div class="task" v-for="(task, index) in tasks" v-if="task.done === false">
+                        <div class="text" @click="doOrUndo(index)" :class="task.done === true ? 'done' : ''">
+                            {{task.text}}
+                        </div>
+                        <div class="action_task">
+                            <div class="modify_task" @click="modifyTask(index)" title="change">
+                                <i class="fa-solid fa-pencil"></i>
+                            </div>
+                            <div class="task_done" @click="doOrUndo(index)" title="done">
+                                <i class="fa-regular fa-circle-check"></i>
+                            </div>
+                            <div class="delete" @click="getToTrashTask(index)" title="delete">
+                                <i class="fa-regular fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="tasks_done" :class="!isDone ? 'hidden' : ''">
+                    <h3>Completed</h3>
+                    <div class="task" v-for="(task, index) in tasks" v-if="task.done === true">
+                        <div class="text" @click="doOrUndo(index)" :class="task.done === true ? 'done' : ''">
+                            {{task.text}}
+                        </div>
+                        <div class="action_task">
+                            <div class="undo" @click="doOrUndo(index)" title="undo">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                            </div>
+                            <div class="delete" @click="getToTrashTask(index)" title="delete">
+                                <i class="fa-regular fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="trashed" :class="tasksTrashed == '' ? 'hidden' : ''">
+                    <h3>Trashed <span @click="emptyBin">(Empty bin)</span></h3>
+                    <div class="task" v-for="(taskTrashed, index) in tasksTrashed">
+                        <div class="text" @click="doOrUndo(index)">
+                            {{taskTrashed.text}}
+                        </div>
+                        <div class="action_task">
+                            <div class="untrash" @click="untrashTask(index)" title="retrieve">
+                                <i class="fa-solid fa-arrow-circle-up"></i>
+                            </div>
+                        </div>
+                </section>
+                </div>
+            </div>
         </div>
-        <div class="tasks_container">
-          <section class="tasks_todo" :class="areDone || tasks.length === 0 ? 'hidden' : ''">
-            <h3>Todo list</h3>
-            <div
-              class="task"
-              v-for="(task, index) in tasks"
-              v-if="task.done === false"
-            >
-              <div
-                class="text"
-                @click="doOrUndo(index)"
-                :class="task.done === true ? 'done' : ''"
-              >
-                {{task.text}}
-              </div>
-              <div class="action_task">
-                <div class="modify_task" @click="modifyTask(index)">
-                  <i class="fa-solid fa-pencil"></i>
-                </div>
-                <div class="task_done" @click="doOrUndo(index)">
-                  <i class="fa-regular fa-circle-check"></i>
-                </div>
-                <div class="delete" @click="getToTrashTask(index)">
-                  <i class="fa-regular fa-times-circle"></i>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section class="tasks_done" :class="!isDone ? 'hidden' : ''">
-            <h3>Completed</h3>
-            <div
-              class="task"
-              v-for="(task, index) in tasks"
-              v-if="task.done === true"
-            >
-              <div
-                class="text"
-                @click="doOrUndo(index)"
-                :class="task.done === true ? 'done' : ''"
-              >
-                {{task.text}}
-              </div>
-              <div class="action_task">
-                <div class="undo" @click="doOrUndo(index)">
-                  <i class="fa-solid fa-arrow-rotate-left"></i>
-                </div>
-                <div class="delete" @click="getToTrashTask(index)">
-                  <i class="fa-regular fa-times-circle"></i>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section class="trashed" :class="tasksTrashed == '' ? 'hidden' : ''">
-            <h3>Trashed <span @click="emptyBin">(Empty bin)</span></h3>
-            <div
-            class="task"
-            v-for="(taskTrashed, index) in tasksTrashed"
-          >
-            <div
-              class="text"
-              @click="doOrUndo(index)"
-            >
-              {{taskTrashed.text}}
-            </div>
-            <div class="action_task">
-              <div class="untrash" @click="untrashTask(index)">
-                <i class="fa-solid fa-arrow-circle-up"></i>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="./assets/js/app.js"></script>
-  </body>
+        <script src='https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js'></script>
+        <script src="./assets/js/app.js"></script>
+</body>
+
 </html>

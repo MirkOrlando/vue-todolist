@@ -1,130 +1,130 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: rgb(171, 208, 210);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(171, 208, 210);
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 h3 {
-  margin-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
-h3 > span {
-  font-size: 0.75rem;
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
+h3>span {
+    font-size: 0.75rem;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .container {
-  width: 1000px;
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    width: 1000px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .tasks_container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
 }
 
 section {
-  padding: 1.5rem;
-  background-color: white;
-  width: calc(100% / 3);
-  min-height: 250px;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px #000000a6;
+    padding: 1.5rem;
+    background-color: white;
+    width: calc(100% / 3);
+    min-height: 250px;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px #000000a6;
 }
 
 .logo {
-  width: 400px;
+    width: 400px;
 }
 
 .action {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 
-.action > input,
-.action > button {
-  padding: 0.75rem 1rem;
-  border: 1px solid black;
-  border-radius: 00.5rem;
-  margin: 0.5rem;
+.action>input,
+.action>button {
+    padding: 0.75rem 1rem;
+    border: 1px solid black;
+    border-radius: 00.5rem;
+    margin: 0.5rem;
 }
 
-.action > input {
-  width: 300px;
+.action>input {
+    width: 300px;
 }
 
 .task {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem;
-  border-bottom: 1px solid lightgray;
-  background-color: rgba(100, 237, 228, 0.121);
-  transition: all 250ms linear;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid lightgray;
+    background-color: rgba(100, 237, 228, 0.121);
+    transition: all 250ms linear;
 }
 
 .task:hover {
-  background-color: rgba(100, 237, 228, 0.39);
-  border-top-left-radius: 0.75rem;
+    background-color: rgba(100, 237, 228, 0.39);
+    border-top-left-radius: 0.75rem;
 }
 
-.task > .action_task {
-  display: flex;
-  gap: 0.5rem;
+.task>.action_task {
+    display: flex;
+    gap: 0.5rem;
 }
 
-.task > .action_task > .task_done {
-  color: rgb(100, 237, 121);
+.task>.action_task>.task_done {
+    color: rgb(100, 237, 121);
 }
 
-.task > .action_task > .undo {
-  color: cornflowerblue;
+.task>.action_task>.undo {
+    color: cornflowerblue;
 }
 
-.task > .action_task > .delete {
-  color: rgb(237, 125, 100);
+.task>.action_task>.delete {
+    color: rgb(237, 125, 100);
 }
 
-.task > .action_task > .untrash {
-  color: rgb(237, 200, 100);
+.task>.action_task>.untrash {
+    color: rgb(237, 200, 100);
 }
 
-.task > .action_task > .modify_task {
-  color: rgb(198, 100, 237);
+.task>.action_task>.modify_task {
+    color: rgb(198, 100, 237);
 }
 
-.task > .action_task > .undo,
-.task > .action_task > .task_done,
-.task > .action_task > .delete,
-.task > .action_task > .untrash,
-.task > .action_task > .modify_task {
-  cursor: pointer;
+.task>.action_task>.undo,
+.task>.action_task>.task_done,
+.task>.action_task>.delete,
+.task>.action_task>.untrash,
+.task>.action_task>.modify_task {
+    cursor: pointer;
 }
 
-.task > .text {
-  max-width: 180px;
+.task>.text {
+    max-width: 180px;
 }
 
 .done {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
