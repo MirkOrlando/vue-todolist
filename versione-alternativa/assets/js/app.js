@@ -38,6 +38,7 @@ const app = new Vue(
         el: '#app',
         data: {
             newTask: '',
+            isDone: false,
             tasks: [
                 {
                     text: 'Fare i compiti',
@@ -91,20 +92,34 @@ const app = new Vue(
                 // this.tasks.splice(i, 1)
                 // console.log(this.tasks.splice(i, 1)[0]);
                 this.tasksTrashed.unshift(this.tasks.splice(i, 1)[0])
+                this.areTasksDone()
             },
             doOrUndo(i) {
                 // console.log('doing or undoing');
                 this.tasks[i].done = !this.tasks[i].done
+                this.areTasksDone()
             },
             untrashTask(i) {
                 this.tasks.push(this.tasksTrashed.splice(i, 1)[0])
+                this.areTasksDone()
             },
             emptyBin() {
                 const userAnswer = prompt("Sei sicuro di voler svuotare il cestino? (y/n) Il suo contenuto non potrà essere recuperato");
                 if (userAnswer === 'y') {
                     this.tasksTrashed = []                    
                 }
+            },
+            areTasksDone() {
+                this.isDone = false
+                this.tasks.forEach(task => {
+                    if (task.done === true) {
+                        this.isDone = true
+                    }
+                });
             }
         },
+        created() {
+            this.areTasksDone()
+        }
     }
 )

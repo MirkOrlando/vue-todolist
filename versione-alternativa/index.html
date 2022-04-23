@@ -27,7 +27,7 @@
           />
           <button @click="addTask">Aggiungi</button>
         </div>
-        <div class="tasks_container" v-if="tasks.length > 0">
+        <div class="tasks_container">
           <section class="tasks_todo">
             <h3>Todo list</h3>
             <div
@@ -55,7 +55,7 @@
               </div>
             </div>
           </section>
-          <section class="tasks_done">
+          <section class="tasks_done" :class="!isDone ? 'hidden' : ''">
             <h3>Completed</h3>
             <div
               class="task"
@@ -79,7 +79,7 @@
               </div>
             </div>
           </section>
-          <section class="trashed">
+          <section class="trashed" :class="tasksTrashed == '' ? 'hidden' : ''">
             <h3>Trashed <span @click="emptyBin">(Empty bin)</span></h3>
             <div
             class="task"
@@ -98,7 +98,6 @@
             </div>
           </section>
         </div>
-        <p v-else>No tasks planned for today</p>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>

@@ -117,3 +117,7 @@ section {
 .done {
   text-decoration: line-through;
 }
+
+.hidden {
+  visibility: hidden;
+}
