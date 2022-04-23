@@ -39,6 +39,7 @@ const app = new Vue(
         data: {
             newTask: '',
             isDone: false,
+            areDone: false,
             tasks: [
                 {
                     text: 'Fare i compiti',
@@ -92,16 +93,19 @@ const app = new Vue(
                 // this.tasks.splice(i, 1)
                 // console.log(this.tasks.splice(i, 1)[0]);
                 this.tasksTrashed.unshift(this.tasks.splice(i, 1)[0])
-                this.areTasksDone()
+                this.isTaskDone()
+                this.areAllTasksDone()
             },
             doOrUndo(i) {
                 // console.log('doing or undoing');
                 this.tasks[i].done = !this.tasks[i].done
-                this.areTasksDone()
+                this.isTaskDone()
+                this.areAllTasksDone()
             },
             untrashTask(i) {
                 this.tasks.push(this.tasksTrashed.splice(i, 1)[0])
-                this.areTasksDone()
+                this.isTaskDone()
+                this.areAllTasksDone()
             },
             emptyBin() {
                 const userAnswer = prompt("Sei sicuro di voler svuotare il cestino? (y/n) Il suo contenuto non potrà essere recuperato");
@@ -109,17 +113,33 @@ const app = new Vue(
                     this.tasksTrashed = []                    
                 }
             },
-            areTasksDone() {
+            isTaskDone() {
                 this.isDone = false
                 this.tasks.forEach(task => {
                     if (task.done === true) {
                         this.isDone = true
                     }
                 });
+            },
+            areAllTasksDone() {
+                this.areDone = false
+                let j = 0
+                while (j < this.tasks.length) {
+                    const task = this.tasks[j];
+                    // console.log(task.done, task.text);
+                    if (task.done === true) {
+                        this.areDone = true;
+                        j++                        
+                    } else {
+                        this.areDone = false
+                        j = this.tasks.length
+                    }
+                }
             }
         },
         created() {
-            this.areTasksDone()
+            this.isTaskDone()
+            this.areAllTasksDone()
         }
     }
 )

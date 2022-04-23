@@ -28,7 +28,7 @@
           <button @click="addTask">Aggiungi</button>
         </div>
         <div class="tasks_container">
-          <section class="tasks_todo">
+          <section class="tasks_todo" :class="areDone || tasks.length === 0 ? 'hidden' : ''">
             <h3>Todo list</h3>
             <div
               class="task"
