@@ -73,8 +73,15 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   border-bottom: 1px solid lightgray;
+  background-color: rgba(100, 237, 228, 0.121);
+  transition: all 250ms linear;
+}
+
+.task:hover {
+  background-color: rgba(100, 237, 228, 0.39);
+  border-top-left-radius: 0.75rem;
 }
 
 .task > .action_task {
